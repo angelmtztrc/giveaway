@@ -11,6 +11,10 @@ const Form = ({}: FormProps) => {
     title: '',
     names: ''
   });
+  const [errors, setErrors] = useState({
+    title: false,
+    names: false
+  });
 
   const { setInitialValues } = useContext(AppCtx);
 
@@ -27,7 +31,27 @@ const Form = ({}: FormProps) => {
     e.preventDefault();
     const { title, names } = values;
     const namesArray = names.split('\n');
-    // TODO : FORM VALIDATION
+
+    // validate the inputs
+    if (title.trim() === '') {
+      setErrors({
+        ...errors,
+        title: true
+      });
+      return;
+    } else if (namesArray.length <= 0) {
+      setErrors({
+        ...errors,
+        names: true
+      });
+      return;
+    }
+
+    // clear errors
+    setErrors({
+      title: false,
+      names: false
+    });
     setInitialValues(title, namesArray);
 
     // redirect to the /resume route
@@ -42,6 +66,7 @@ const Form = ({}: FormProps) => {
         name="title"
         label="Title"
         descriptionText="Title or purpose of this random pick"
+        error={errors.title ? 'The title is required' : ''}
       />
       <Input.TextArea
         value={values.names}
@@ -50,6 +75,7 @@ const Form = ({}: FormProps) => {
         label="Names"
         descriptionText="A list of names, please add each name in a new line."
         rows={10}
+        error={errors.title ? 'The names is required' : ''}
       ></Input.TextArea>
       <div className="flex justify-center w-full">
         <Button htmlType={'submit'} onClick={handleSubmit} size={'large'} className="bg-pink-500">
