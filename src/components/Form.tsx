@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Input, Button } from '@supabase/ui';
+import { useHistory } from 'react-router-dom';
 
 // context
 import AppCtx from '../context/AppCtx';
@@ -13,6 +14,8 @@ const Form = ({}: FormProps) => {
 
   const { setInitialValues } = useContext(AppCtx);
 
+  const history = useHistory();
+
   const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setValues({
       ...values,
@@ -24,8 +27,11 @@ const Form = ({}: FormProps) => {
     e.preventDefault();
     const { title, names } = values;
     const namesArray = names.split('\n');
-
+    // TODO : FORM VALIDATION
     setInitialValues(title, namesArray);
+
+    // redirect to the /resume route
+    history.push('/resume');
   };
 
   return (
@@ -46,13 +52,7 @@ const Form = ({}: FormProps) => {
         rows={10}
       ></Input.TextArea>
       <div className="flex justify-center w-full">
-        <Button
-          htmlType={'submit'}
-          onClick={handleSubmit}
-          size={'large'}
-          disabled={values.title || values.names === '' ? true : false}
-          className="bg-pink-500"
-        >
+        <Button htmlType={'submit'} onClick={handleSubmit} size={'large'} className="bg-pink-500">
           Start
         </Button>
       </div>
