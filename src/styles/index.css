@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
+
+.sbui-input {
+  @apply focus:border-pink-500 focus:ring-pink-500;
+}
+
+.sbui-btn-primary {
+  @apply hover:bg-pink-600;
+}
+
 @tailwind utilities;
