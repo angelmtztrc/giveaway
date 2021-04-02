@@ -35,11 +35,18 @@ const AppProvider = ({ children }: AppProviderProps) => {
     });
   };
 
+  const setMessedValues = (): void => {
+    dispatch({
+      type: 'MESS_VALUES'
+    });
+  };
+
   return (
     <AppCtx.Provider
       value={{
         state,
-        setInitialValues
+        setInitialValues,
+        setMessedValues
       }}
     >
       {children}

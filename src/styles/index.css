@@ -9,4 +9,12 @@
   @apply hover:bg-pink-600;
 }
 
+.sbui-tab-button-underline--active {
+  @apply border-pink-500;
+}
+
+#participants:focus {
+  outline: none;
+}
+
 @tailwind utilities;
