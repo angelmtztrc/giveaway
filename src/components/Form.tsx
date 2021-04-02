@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Input, Button } from '@supabase/ui';
+
+// context
+import AppCtx from '../context/AppCtx';
 
 export type FormProps = {};
 const Form = ({}: FormProps) => {
@@ -7,6 +10,8 @@ const Form = ({}: FormProps) => {
     title: '',
     names: ''
   });
+
+  const { setInitialValues } = useContext(AppCtx);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setValues({
@@ -17,8 +22,10 @@ const Form = ({}: FormProps) => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log(values);
-    // TODO: Send to the global state
+    const { title, names } = values;
+    const namesArray = names.split('\n');
+
+    setInitialValues(title, namesArray);
   };
 
   return (
@@ -39,7 +46,13 @@ const Form = ({}: FormProps) => {
         rows={10}
       ></Input.TextArea>
       <div className="flex justify-center w-full">
-        <Button htmlType={'submit'} onClick={handleSubmit} size={'large'} className="bg-pink-500">
+        <Button
+          htmlType={'submit'}
+          onClick={handleSubmit}
+          size={'large'}
+          disabled={values.title || values.names === '' ? true : false}
+          className="bg-pink-500"
+        >
           Start
         </Button>
       </div>

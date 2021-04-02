@@ -28,10 +28,18 @@ export type AppProviderProps = {
 const AppProvider = ({ children }: AppProviderProps) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  const setInitialValues = (title: string, names: string[]): void => {
+    dispatch({
+      type: 'SET_INITIAL_VALUES',
+      payload: { title, names }
+    });
+  };
+
   return (
     <AppCtx.Provider
       value={{
-        state
+        state,
+        setInitialValues
       }}
     >
       {children}

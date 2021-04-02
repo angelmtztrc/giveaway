@@ -3,7 +3,8 @@ import { InitialStateValues } from './AppProvider';
 
 interface AppCtxInterface {
   state: InitialStateValues;
+  setInitialValues: (title: string, names: string[]) => void;
 }
-const AppCtx = createContext<AppCtxInterface | null>(null);
+const AppCtx = createContext({} as AppCtxInterface);
 
 export default AppCtx;

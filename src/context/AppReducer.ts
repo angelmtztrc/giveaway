@@ -1,12 +1,10 @@
 import { InitialStateValues } from './AppProvider';
+import { ActionTypes } from '../types/ActionTypes';
 
-type ActionProps = {
-  type: string;
-  payload: void;
-};
-
-const AppReducer = (state: InitialStateValues, action: ActionProps) => {
+const AppReducer = (state: InitialStateValues, action: ActionTypes) => {
   switch (action.type) {
+    case 'SET_INITIAL_VALUES':
+      return { ...state, ...action.payload };
     default:
       return state;
   }
