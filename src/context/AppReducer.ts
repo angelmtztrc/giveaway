@@ -16,6 +16,14 @@ const AppReducer = (state: InitialStateValues, action: ActionTypes) => {
         ...state,
         names: [...disorderAnArray(state.names)]
       };
+    case 'SET_OPTIONS':
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          ...action.payload
+        }
+      };
     default:
       return state;
   }

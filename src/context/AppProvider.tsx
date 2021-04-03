@@ -5,6 +5,8 @@ import AppReducer from './AppReducer';
 export interface InitialStateValues {
   title: string;
   names: string[];
+  winners: string[];
+  substitutes: string[];
   options: {
     winners: number;
     substitutes: number;
@@ -12,9 +14,17 @@ export interface InitialStateValues {
   };
 }
 
+export type setOptionsProps = {
+  winners: number;
+  substitutes: number;
+  avoidDuplicates: boolean;
+};
+
 const initialState: InitialStateValues = {
   title: '',
   names: [],
+  winners: [],
+  substitutes: [],
   options: {
     winners: 1,
     substitutes: 1,
@@ -41,12 +51,24 @@ const AppProvider = ({ children }: AppProviderProps) => {
     });
   };
 
+  const setOptions = ({ winners, substitutes, avoidDuplicates }: setOptionsProps): void => {
+    dispatch({
+      type: 'SET_OPTIONS',
+      payload: {
+        winners,
+        substitutes,
+        avoidDuplicates
+      }
+    });
+  };
+
   return (
     <AppCtx.Provider
       value={{
         state,
         setInitialValues,
-        setMessedValues
+        setMessedValues,
+        setOptions
       }}
     >
       {children}

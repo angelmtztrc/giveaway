@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 
+.sbui-inputnumber,
 .sbui-input {
   @apply focus:border-pink-500 focus:ring-pink-500;
 }
@@ -13,7 +14,8 @@
   @apply border-pink-500;
 }
 
-#participants:focus {
+#participants:focus,
+#options:focus {
   outline: none;
 }
 

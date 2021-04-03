@@ -1,15 +1,23 @@
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Tabs } from '@supabase/ui';
+import { Tabs, Button } from '@supabase/ui';
 
 // contexts
 import AppCtx from '../context/AppCtx';
+// components
 import NamesList from './NamesList';
+import Options from './Options';
+import { useState } from 'react';
 
 export type ResumeProps = {};
 const Resume = ({}: ResumeProps) => {
-  const { state } = useContext(AppCtx);
+  const { state, setOptions } = useContext(AppCtx);
+  const [customOptions, setCustomOptions] = useState({
+    winners: state.options.winners,
+    substitutes: state.options.substitutes,
+    avoidDuplicates: state.options.avoidDuplicates
+  });
   const history = useHistory();
 
   // prevent the user for go to /resume without the initial values
@@ -19,15 +27,27 @@ const Resume = ({}: ResumeProps) => {
     }
   }, [state, history]);
 
+  const handleConfirm = () => {
+    setOptions(customOptions);
+  };
+
   return (
     <div className="px-8 py-10 max-w-lg bg-white rounded-md">
-      <Tabs type="underlined">
+      <Tabs
+        type="underlined"
+        size="large"
+        addOnAfter={[
+          <Button onClick={handleConfirm} type="outline" size="small">
+            Confirm
+          </Button>
+        ]}
+      >
         <Tabs.Panel id="participants" label="Participants">
           <NamesList />
         </Tabs.Panel>
 
         <Tabs.Panel id="options" label="Options">
-          Tab two content
+          <Options customOptions={customOptions} setCustomOptions={setCustomOptions} />
         </Tabs.Panel>
       </Tabs>
     </div>
