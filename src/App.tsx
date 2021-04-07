@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Typography } from '@supabase/ui';
 
 // providers
@@ -6,6 +6,7 @@ import AppProvider from './context/AppProvider';
 // components
 import Form from './components/Form';
 import Resume from './components/Resume';
+import Winner from './components/Winner';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
               <Switch>
                 <Route exact path="/" component={Form} />
                 <Route exact path="/resume" component={Resume} />
+                <Route exact path="/winner" component={Winner} />
+                <Redirect exact to="/" />
               </Switch>
             </main>
           </div>

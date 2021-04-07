@@ -75,7 +75,7 @@ const Form = ({}: FormProps) => {
         label="Names"
         descriptionText="A list of names, please add each name in a new line."
         rows={10}
-        error={errors.title ? 'The names is required' : ''}
+        error={errors.names ? 'The names is required' : ''}
       ></Input.TextArea>
       <div className="flex justify-center w-full">
         <Button htmlType={'submit'} onClick={handleSubmit} size={'large'} className="bg-pink-500">

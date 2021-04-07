@@ -29,6 +29,7 @@ const Resume = ({}: ResumeProps) => {
 
   const handleConfirm = () => {
     setOptions(customOptions);
+    history.push('/winner');
   };
 
   return (
