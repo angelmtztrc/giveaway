@@ -25,12 +25,12 @@ const getRandomWinnersAndSubstitutes = (
     winners.push(winner);
 
     // return no-winners names
-    remaining.filter((name: string) => name !== winner);
+    remaining = [...remaining.filter((name: string) => name !== winner)];
   }
 
   // get a random substitute
   for (let i = 0; i < quantityOfSubstitutes; i++) {
-    const substitute = remaining[getRandomNumber(0, data.length - 1)];
+    const substitute = remaining[getRandomNumber(0, remaining.length - 1)];
     substitutes.push(substitute);
   }
 

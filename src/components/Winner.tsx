@@ -1,7 +1,6 @@
-import { useContext } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { Typography, Badge } from '@supabase/ui';
 // contexts
 import AppCtx from '../context/AppCtx';
 // components
@@ -40,7 +39,29 @@ const Winner = ({}: WinnerProps) => {
 
   return (
     <div className="px-8 py-10 max-w-lg bg-white rounded-md">
-      {counter !== 0 ? <Spin /> : <h1>Winner!</h1>}
+      {counter !== 0 ? (
+        <Spin />
+      ) : (
+        <div className="text-center">
+          <Typography.Title level={2}>{state.title}</Typography.Title>
+          <div className="flex items-center justify-between mt-5 text-left">
+            <ul>
+              {state.winners.map((name: string) => (
+                <li key={name}>
+                  {name} <Badge color="pink">Winner</Badge>{' '}
+                </li>
+              ))}
+            </ul>
+            <ul>
+              {state.substitutes.map((name: string) => (
+                <li key={name}>
+                  {name} <Badge color="purple">Substitute</Badge>{' '}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
