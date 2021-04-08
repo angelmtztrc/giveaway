@@ -6,6 +6,7 @@ interface AppCtxInterface {
   setInitialValues: (title: string, names: string[]) => void;
   setMessedValues: () => void;
   setOptions: ({ winners, substitutes, avoidDuplicates }: setOptionsProps) => void;
+  setWinnersAndSubstitutes: () => void;
 }
 const AppCtx = createContext({} as AppCtxInterface);
 

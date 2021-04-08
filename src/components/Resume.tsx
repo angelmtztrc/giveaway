@@ -20,8 +20,8 @@ const Resume = ({}: ResumeProps) => {
   });
   const history = useHistory();
 
-  // prevent the user for go to /resume without the initial values
   useEffect(() => {
+    // prevent the user for go to /resume without the initial values
     if (!state.title) {
       history.push('/');
     }

@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { getRandomWinnersAndSubstitutes } from '../libs';
 import AppCtx from './AppCtx';
 import AppReducer from './AppReducer';
 
@@ -62,13 +63,32 @@ const AppProvider = ({ children }: AppProviderProps) => {
     });
   };
 
+  const setWinnersAndSubstitutes = (): void => {
+    const { names, options } = state;
+
+    const { winners, substitutes } = getRandomWinnersAndSubstitutes(
+      names,
+      options.winners,
+      options.substitutes
+    );
+
+    dispatch({
+      type: 'SET_WINNERS_AND_SUBSTITUTES',
+      payload: {
+        winners,
+        substitutes
+      }
+    });
+  };
+
   return (
     <AppCtx.Provider
       value={{
         state,
         setInitialValues,
         setMessedValues,
-        setOptions
+        setOptions,
+        setWinnersAndSubstitutes
       }}
     >
       {children}

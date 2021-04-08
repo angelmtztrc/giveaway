@@ -4,4 +4,8 @@ export type ActionTypes =
   | {
       type: 'SET_OPTIONS';
       payload: { winners: number; substitutes: number; avoidDuplicates: boolean };
+    }
+  | {
+      type: 'SET_WINNERS_AND_SUBSTITUTES';
+      payload: { winners: string[]; substitutes: string[] };
     };

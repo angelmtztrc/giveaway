@@ -24,6 +24,12 @@ const AppReducer = (state: InitialStateValues, action: ActionTypes) => {
           ...action.payload
         }
       };
+    case 'SET_WINNERS_AND_SUBSTITUTES':
+      return {
+        ...state,
+        winners: action.payload.winners,
+        substitutes: action.payload.substitutes
+      };
     default:
       return state;
   }
